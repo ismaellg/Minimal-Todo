@@ -29,6 +29,8 @@ import android.widget.TextView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
+import com.sumup.merchant.api.SumUpAPI;
+import com.sumup.merchant.api.SumUpPayment;
 
 import org.json.JSONException;
 
@@ -36,8 +38,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
+    private static final int PAYMENT_REQUEST = 23123;
     private RecyclerViewEmptySupport mRecyclerView;
     private FloatingActionButton mAddToDoItemFAB;
     private ArrayList<ToDoItem> mToDoItemsArrayList;
@@ -341,6 +345,17 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
                 return true;
+            case R.id.payment:
+                SumUpPayment payment = SumUpPayment.builder()
+                        .affiliateKey(BuildConfig.AFFILIATE_KEY)
+                        .productAmount(39.99)
+                        .currency(SumUpPayment.Currency.EUR)
+                        .foreignTransactionId(UUID.randomUUID().toString())
+                        .skipSuccessScreen()
+                        .build();
+
+                SumUpAPI.openPaymentActivity(this, payment, PAYMENT_REQUEST);
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -349,6 +364,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == PAYMENT_REQUEST && resultCode == SumUpAPI.Response.ResultCode.SUCCESSFUL && data != null) {
+            String txCode = data.getStringExtra(SumUpAPI.Response.TX_CODE);
+
+            Intent intent = ReceiptActivity.newInstance(this, txCode);
+
+            startActivity(intent);
+        }
         if(resultCode!= RESULT_CANCELED && requestCode == REQUEST_ID_TODO_ITEM){
             ToDoItem item =(ToDoItem) data.getSerializableExtra(TODOITEM);
             if(item.getToDoText().length()<=0){

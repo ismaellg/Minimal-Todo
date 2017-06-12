@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+import com.sumup.merchant.api.SumUpState;
 
 import java.util.Map;
 
@@ -13,6 +14,14 @@ public class AnalyticsApplication extends Application {
 
     private Tracker mTracker;
     private static final boolean IS_ENABLED = true;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        SumUpState.init(this);
+    }
+
     synchronized private Tracker getDefaultTracker(){
         if(mTracker==null){
             GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);

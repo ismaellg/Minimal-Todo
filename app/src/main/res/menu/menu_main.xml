@@ -17,4 +17,9 @@
         app:showAsAction="never"
         />
 
+    <item android:title="@string/payment"
+        android:id="@+id/payment"
+        app:showAsAction="never"
+        />
+
 </menu>
