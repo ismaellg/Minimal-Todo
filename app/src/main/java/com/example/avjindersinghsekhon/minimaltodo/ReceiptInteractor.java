@@ -23,6 +23,10 @@ public class ReceiptInteractor {
         api = retrofit.create(ReceiptApi.class);
     }
 
+    public ReceiptInteractor(ReceiptApi api) {
+        this.api = api;
+    }
+
     public Single<Receipt> getReceipt(String txCode) {
         return api.getReceipt(txCode, BuildConfig.MERCHANT_ID);
     }

@@ -6,8 +6,12 @@ package com.example.avjindersinghsekhon.minimaltodo;
 
 public interface ReceiptView {
 
+    void showLoading();
+
     void setReceipt(Receipt receipt);
 
     void showError(Throwable throwable);
+
+    void dismissLoading();
 
 }

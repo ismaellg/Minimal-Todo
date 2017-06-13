@@ -25,7 +25,20 @@ public class ReceiptPresenter {
         this.interactor = interactor;
     }
 
+    public void attachView(ReceiptView view) {
+        this.view = view;
+    }
+
+    public void detachView() {
+        this.view = null;
+
+        cancel();
+    }
+
     public void getReceipt(String txCode) {
+        if(view != null) {
+            view.showLoading();
+        }
         disposable = interactor.getReceipt(txCode)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -33,6 +46,8 @@ public class ReceiptPresenter {
                     @Override
                     public void accept(Receipt receipt) throws Exception {
                         if(view != null) {
+                            view.dismissLoading();
+
                             view.setReceipt(receipt);
                         }
                     }
@@ -40,10 +55,19 @@ public class ReceiptPresenter {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         if(view != null) {
+                            view.dismissLoading();
+
                             view.showError(throwable);
                         }
                     }
                 });
     }
 
+    public void cancel() {
+        if(disposable != null) {
+            disposable.dispose();
+
+            disposable = null;
+        }
+    }
 }

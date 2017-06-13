@@ -32,4 +32,7 @@
     <string name="tx_code">Transaction</string>
     <string name="value">Value</string>
     <string name="merchant">Merchant</string>
+    <string name="error">An error occurred</string>
+    <string name="amount">%1$s %2$s</string>
+    <string name="loading">Loading receipt...</string>
 </resources>

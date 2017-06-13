@@ -30,6 +30,9 @@ android {
             buildConfigField "String", "API_BASE_URL", "\"https://receipts-ng.sumup.com/\""
         }
     }
+    dexOptions {
+        jumboMode true
+    }
     sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/'] } }
     lintOptions {
         abortOnError false
