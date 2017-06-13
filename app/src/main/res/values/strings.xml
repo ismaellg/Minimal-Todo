@@ -29,4 +29,7 @@
     <string name="remove">Remove</string>
     <string name="todo_error">Please enter a Todo</string>
     <string name="payment">Payment</string>
+    <string name="tx_code">Transaction</string>
+    <string name="value">Value</string>
+    <string name="merchant">Merchant</string>
 </resources>

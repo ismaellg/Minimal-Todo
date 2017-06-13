@@ -346,15 +346,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.payment:
-                SumUpPayment payment = SumUpPayment.builder()
-                        .affiliateKey(BuildConfig.AFFILIATE_KEY)
-                        .productAmount(39.99)
-                        .currency(SumUpPayment.Currency.EUR)
-                        .foreignTransactionId(UUID.randomUUID().toString())
-                        .skipSuccessScreen()
-                        .build();
+                Intent intent1 = ReceiptActivity.newInstance(this, "");
 
-                SumUpAPI.openPaymentActivity(this, payment, PAYMENT_REQUEST);
+                startActivity(intent1);
                 return true;
 
             default:
