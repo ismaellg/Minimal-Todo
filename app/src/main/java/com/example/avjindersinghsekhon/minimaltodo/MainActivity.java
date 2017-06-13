@@ -348,7 +348,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.payment:
                 SumUpPayment payment = SumUpPayment.builder()
                         .affiliateKey(BuildConfig.AFFILIATE_KEY)
-                        .productAmount(39.99)
+                        .productTitle("PS4 Pro")
+                        .productAmount(399.99)
                         .currency(SumUpPayment.Currency.EUR)
                         .foreignTransactionId(UUID.randomUUID().toString())
                         .skipSuccessScreen()

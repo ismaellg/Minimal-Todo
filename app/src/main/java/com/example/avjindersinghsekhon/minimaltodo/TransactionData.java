@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * Created by ismael on 6/13/17.
@@ -17,6 +18,8 @@ public class TransactionData implements Serializable {
     private BigDecimal amount = BigDecimal.ZERO;
 
     private String currency;
+
+    private List<Product> products;
 
     public String getCode() {
         return code;
@@ -40,6 +43,14 @@ public class TransactionData implements Serializable {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     @Override

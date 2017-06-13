@@ -35,4 +35,8 @@
     <string name="error">An error occurred</string>
     <string name="amount">%1$s %2$s</string>
     <string name="loading">Loading receipt...</string>
+    <string name="product_name">Product</string>
+    <string name="price">Price</string>
+    <string name="product_count">%1$dx %2$s</string>
+    <string name="total">Total</string>
 </resources>

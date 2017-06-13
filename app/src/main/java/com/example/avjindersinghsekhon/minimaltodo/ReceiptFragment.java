@@ -35,6 +35,15 @@ public class ReceiptFragment extends Fragment implements ReceiptView {
     @BindView(R.id.value)
     TextView value;
 
+    @BindView(R.id.product_name)
+    TextView productName;
+
+    @BindView(R.id.price)
+    TextView price;
+
+    @BindView(R.id.total)
+    TextView total;
+
     private ReceiptPresenter presenter;
 
     private Unbinder unbinder;
@@ -123,6 +132,16 @@ public class ReceiptFragment extends Fragment implements ReceiptView {
             nf.setMinimumFractionDigits(2);
 
             value.setText(getString(R.string.amount, nf.format(txData.getAmount()), txData.getCurrency()));
+
+            if(txData.getProducts() != null && !txData.getProducts().isEmpty()) {
+                Product product = txData.getProducts().get(0);
+
+                productName.setText(getString(R.string.product_count, product.getQuantity(), product.getName()));
+
+                price.setText(getString(R.string.amount, nf.format(product.getPrice()), txData.getCurrency()));
+
+                total.setText(getString(R.string.amount, nf.format(product.getTotal()), txData.getCurrency()));
+            }
         }
 
         if(receipt.getMerchantData() != null && receipt.getMerchantData().getMerchant() != null) {
